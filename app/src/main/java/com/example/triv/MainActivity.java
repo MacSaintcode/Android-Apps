@@ -5,11 +5,18 @@ import  java.lang.Object;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView counttext;
+    Button Answer1;
+    Button Answer2;
+    Button Answer3;
+    Button Answer4;
+    ProgressBar timescrol;
     private CountDownTimer time;
     private long Milliseconds=20000;
     boolean running=true;
@@ -19,6 +26,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         counttext=findViewById(R.id.timer);
+        Answer1=findViewById(R.id.answer1);
+        Answer2=findViewById(R.id.answer2);
+        Answer3=findViewById(R.id.answer3);
+        Answer4=findViewById(R.id.answer4);
+        timescrol=findViewById(R.id.timescroll);
+
 
 
 
@@ -48,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             tim+=second;
         }
         counttext.setText(tim);
+
 
     }
 

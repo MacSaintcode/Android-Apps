@@ -80,6 +80,7 @@
             />
 
         <Button
+            android:id="@+id/answer1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/answer1"
@@ -95,6 +96,7 @@
             />
 
         <Button
+            android:id="@+id/answer2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/answer2"
@@ -109,6 +111,7 @@
             />
 
         <Button
+            android:id="@+id/answer3"
             android:padding="16sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -122,6 +125,7 @@
 
             />
         <Button
+            android:id="@+id/answer4"
             android:padding="16sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
