@@ -12,13 +12,15 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     TextView counttext;
+    TextView head;
+    TextView question;
     Button Answer1;
     Button Answer2;
     Button Answer3;
     Button Answer4;
     ProgressBar timescrol;
     private CountDownTimer time;
-    private long Milliseconds=20000;
+    private long Milliseconds=15000;
     boolean running=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
         Answer3=findViewById(R.id.answer3);
         Answer4=findViewById(R.id.answer4);
         timescrol=findViewById(R.id.timescroll);
-
+        head=findViewById(R.id.Questionshead);
+        question=findViewById(R.id.Questions);
 
 
 
@@ -54,14 +57,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updatetimer(){
-        int second=(int) Milliseconds % 20000 / 1000;
+        int second=(int) Milliseconds % 15000 / 1000;
         String tim ="";
         if(second<10){
             tim+="0";
             tim+=second;
         }
         counttext.setText(tim);
-
+        timescrol.setProgress(second);
 
     }
 
