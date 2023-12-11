@@ -33,7 +33,7 @@
             android:layout_toEndOf="@+id/Questionshead"
             android:max="20"
             android:layout_below="@+id/timer"
-            android:progress="20"
+            android:progress="0"
             android:visibility="visible" />
 
         <TextView
