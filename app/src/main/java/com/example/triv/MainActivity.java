@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     Button Answer3;
     Button Answer4;
     ProgressBar timescrol;
+    private DBHandler dbHandler;
     private CountDownTimer time;
     private long Milliseconds=15000;
     boolean running=true;
@@ -35,9 +36,6 @@ public class MainActivity extends AppCompatActivity {
         timescrol=findViewById(R.id.timescroll);
         head=findViewById(R.id.Questionshead);
         question=findViewById(R.id.Questions);
-
-
-
     }
     void starttimer(){
         time=new CountDownTimer(Milliseconds,1000) {

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainMenu">
+
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_width="70sp"
+            android:layout_height="70sp"
+            android:src="@drawable/anoda1"
+            android:layout_marginTop="20sp"
+            android:layout_marginLeft="100sp"
+            android:focusable="false"   >
+        </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trivia"
+            android:textStyle="bold"
+            android:textSize="45sp"
+            android:layout_marginTop="25sp"
+            >
+        </TextView>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_marginTop="250sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:height="60sp"
+        android:layout_marginLeft="100sp"
+        android:layout_marginRight="100sp"
+        android:text="Play"
+
+        android:textStyle="bold"
+        android:textSize="25sp">
+
+    </Button>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:height="60sp"
+        android:layout_marginTop="20sp"
+        android:layout_marginLeft="80sp"
+        android:layout_marginRight="80sp"
+        android:text="Leaderboard"
+        android:textStyle="bold"
+        android:textSize="25sp">
+
+    </Button>
+
+
+
+</LinearLayout>
