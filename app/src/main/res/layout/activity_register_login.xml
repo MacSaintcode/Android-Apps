@@ -30,7 +30,8 @@
             android:src="@drawable/anoda1"
             android:layout_marginTop="20sp"
             android:layout_marginLeft="50sp"
-            android:focusable="false"   >
+            android:focusable="false"
+            android:alpha="0.7">
         </ImageView>
 
         <TextView

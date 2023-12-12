@@ -4,7 +4,8 @@
     <string name="answer3">???</string>
     <string name="answer2">???</string>
     <string name="answer1">???</string>
-    <string name="question">???</string>
+    <string name="question">Question 1</string>
     <string name="questionair">???</string>
     <string name="countdown">15</string>
+    <string name="trivia_leaderboard">Trivia Leaderboard</string>
 </resources>
