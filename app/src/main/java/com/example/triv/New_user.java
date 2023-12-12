@@ -56,11 +56,11 @@ public class New_user extends AppCompatActivity {
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!pass.equals(cpass)){
-                    Toast.makeText(New_user.this, "Password Does not match!", Toast.LENGTH_SHORT).show();
-
-                } else if (pass.isEmpty()|| user.isEmpty()||names.isEmpty()||cpass.isEmpty()) {
+                if(pass.isEmpty()|| user.isEmpty()||names.isEmpty()||cpass.isEmpty()){
                     Toast.makeText(New_user.this, "All field must be filled", Toast.LENGTH_SHORT).show();
+
+                } else if (!pass.equals(cpass)) {
+                    Toast.makeText(New_user.this, "Password Does not match!", Toast.LENGTH_SHORT).show();
 
                 } else {
 

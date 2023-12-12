@@ -43,6 +43,7 @@ public class register_login extends AppCompatActivity {
                 startActivity(call);
             }
         });
+
         account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -61,6 +61,22 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void forgotpassword(String usernames, String passcode) {
+
+    }
+
+    public void userchecker(String usernames) {
+
+    }
+
+    public boolean confirm(SQLiteDatabase db,String usernames, String passcode) {
+
+//        db.execSQL("SELECT * FROM details WHERE "+usernames +"="+ passcode);
+//        db.
+
+        return false;
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // this method is called to check if the table exists already.
