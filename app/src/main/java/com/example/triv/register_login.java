@@ -48,6 +48,15 @@ public class register_login extends AppCompatActivity {
             }
         });
 
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //check if user exist in db first
+
+                Intent call=new Intent(register_login.this,MainActivity.class);
+            }
+        });
+
     }
 
 
