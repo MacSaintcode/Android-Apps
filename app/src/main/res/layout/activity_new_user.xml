@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40sp"
         android:layout_marginRight="40sp"
-        android:layout_marginTop="140sp"
+        android:layout_marginTop="100sp"
         android:hint="Personal Name"
         android:textAlignment="center"
         android:textSize="20sp"

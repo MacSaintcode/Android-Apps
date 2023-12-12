@@ -20,7 +20,8 @@
             android:src="@drawable/arrow"
             android:layout_marginTop="20sp"
             android:layout_marginLeft="5sp"
-            android:focusable="false"   >
+            android:focusable="false"
+            >
         </ImageView>
 
         <ImageView
