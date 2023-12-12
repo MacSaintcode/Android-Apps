@@ -27,7 +27,7 @@ public class DBHandler extends SQLiteOpenHelper {
         // an sqlite query and we are
         // setting our column names
         // along with their data types.
-        String query = "CREATE TABLE details ( id INTEGER PRIMARY KEY AUTOINCREMENT, names TEXT,Score INTEGER)";
+        String query = "CREATE TABLE details ( id INTEGER PRIMARY KEY AUTOINCREMENT, names TEXT,usernames TEXT UNIQUE,password TEXT,Score INTEGER default(0))";
 
         // at last we are calling a exec sql
         // method to execute above sql query
@@ -35,7 +35,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     // this method is use to add new course to our sqlite database.
-    public void addNewCourse(String Name, int Score) {
+    public void newuser(String Name, String usernames, String passcode, int Score) {
 
         // on below line we are creating a variable for
         // our sqlite database and calling writable method
@@ -49,6 +49,8 @@ public class DBHandler extends SQLiteOpenHelper {
         // on below line we are passing all values
         // along with its key and value pair.
         values.put("names", Name);
+        values.put("Score",usernames);
+        values.put("Score",passcode);
         values.put("Score",Score);
         // after adding all values we are passing
         // content values to our table.

@@ -33,18 +33,21 @@ public class register_login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent call=new Intent(register_login.this,MainMenu.class);
+                startActivity(call);
             }
         });
         forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent call=new Intent(register_login.this,ForgotPassword.class);
+                startActivity(call);
             }
         });
         account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent call=new Intent(register_login.this,New_user.class);
+                startActivity(call);
             }
         });
 
@@ -54,6 +57,7 @@ public class register_login extends AppCompatActivity {
                 //check if user exist in db first
 
                 Intent call=new Intent(register_login.this,MainActivity.class);
+                startActivity(call);
             }
         });
 

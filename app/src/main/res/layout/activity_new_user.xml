@@ -5,44 +5,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+   android:scrollbars="vertical"
     tools:context=".New_user"
     >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70sp"
+        android:layout_marginTop="20sp">
+
         <ImageView
             android:id="@+id/back"
             android:layout_width="45sp"
             android:layout_height="70sp"
             android:src="@drawable/arrow"
-            android:layout_marginTop="20sp"
             android:layout_marginLeft="5sp"
-            android:focusable="false"   >
+            android:focusable="false"
+            >
         </ImageView>
+
+
 
         <ImageView
             android:layout_width="70sp"
-            android:layout_height="70sp"
+            android:layout_height="match_parent"
             android:src="@drawable/anoda1"
-            android:layout_marginTop="20sp"
-            android:layout_marginLeft="50sp"
-            android:focusable="false"   >
+            android:layout_toLeftOf="@+id/Questionshead"
+            android:layout_marginLeft="7sp"
+            android:focusable="false"
+            android:alpha="0.7">
         </ImageView>
 
         <TextView
+            android:id="@+id/Questionshead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="Trivia"
-            android:textStyle="bold"
-            android:textSize="45sp"
-            android:layout_marginTop="25sp"
-            >
-        </TextView>
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
-    </LinearLayout>
+
+    </RelativeLayout>
+
 
     <EditText
         android:layout_width="match_parent"
@@ -53,6 +58,8 @@
         android:hint="Personal Name"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:id="@+id/name"
+
         >
 
     </EditText>
@@ -65,6 +72,7 @@
         android:textAlignment="center"
         android:hint="Username"
         android:layout_marginRight="40sp"
+        android:id="@+id/username"
         >
     </EditText>
 
@@ -76,19 +84,23 @@
         android:textAlignment="center"
         android:hint="Password"
         android:layout_marginRight="40sp"
+        android:id="@+id/pass"
         >
-    </EditText>   <EditText
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="40sp"
-    android:layout_marginTop="50sp"
-    android:textAlignment="center"
-    android:hint="Confirm Password"
-    android:layout_marginRight="40sp"
-    >
-</EditText>
+    </EditText>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40sp"
+        android:layout_marginTop="50sp"
+        android:textAlignment="center"
+        android:hint="Confirm Password"
+        android:layout_marginRight="40sp"
+        android:id="@+id/cpass">
+    </EditText>
 
     <Button
+        android:id="@+id/post"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:height="60sp"
@@ -96,7 +108,7 @@
         android:layout_marginLeft="120sp"
         android:layout_marginRight="120sp"
         android:textSize="20sp"
-        android:text="Sign-up"
+        android:text="@string/signup"
         >
     </Button>
 

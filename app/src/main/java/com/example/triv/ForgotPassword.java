@@ -22,6 +22,7 @@ public class ForgotPassword extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent call=new Intent(ForgotPassword.this,register_login.class);
+                startActivity(call);
             }
         });
 

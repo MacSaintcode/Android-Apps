@@ -8,17 +8,38 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50sp"
         android:layout_marginTop="20sp">
+
+        <TextView
+            android:id="@+id/scoretext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/scoretext"
+            android:textSize="19sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/scoretext"
+            android:text="@string/score"
+            android:layout_marginLeft="5sp"
+            android:textSize="19sp"
+            android:textStyle="bold" />
+
 
         <ImageView
             android:layout_width="70sp"
             android:layout_height="70sp"
             android:src="@drawable/anoda1"
             android:layout_toLeftOf="@+id/Questionshead"
-            android:layout_marginLeft="7sp"
+            android:layout_marginLeft="100sp"
             android:focusable="false"
             android:alpha="0.7">
         </ImageView>
@@ -28,7 +49,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
             android:text="@string/question"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -37,7 +57,8 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="347sp">
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40sp">
 
             <ProgressBar
                 android:id="@+id/timescroll"
@@ -47,7 +68,7 @@
 
                 android:max="20"
                 android:layout_below="@+id/timer"
-                android:progress="0"
+                android:progress="7"
                 android:visibility="visible"
                 />
 
@@ -82,8 +103,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center"
-        android:layout_marginTop="100sp"
+        android:layout_marginTop="90sp"
         >
 
 
@@ -92,10 +112,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/questionair"
-            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:gravity="center"
             android:layout_marginRight="20sp"
             android:layout_marginLeft="20sp"
+            android:height="70sp"
             />
 
         <Button
@@ -105,7 +127,7 @@
             android:text="@string/answer1"
             android:gravity="center"
             android:textStyle="bold"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:layout_marginRight="30sp"
             android:layout_marginLeft="30sp"
             android:padding="16sp"
@@ -121,7 +143,7 @@
             android:text="@string/answer2"
             android:padding="16sp"
             android:textStyle="bold"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:gravity="center"
             android:layout_marginRight="30sp"
             android:layout_marginLeft="30sp"
@@ -137,7 +159,7 @@
             android:text="@string/answer3"
             android:gravity="center"
             android:textStyle="bold"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:layout_marginRight="30sp"
             android:layout_marginLeft="30sp"
             android:layout_marginTop="40sp"
@@ -151,7 +173,7 @@
             android:text="@string/answer4"
             android:gravity="center"
             android:textStyle="bold"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:layout_marginRight="30sp"
             android:layout_marginLeft="30sp"
             android:layout_marginTop="40sp"
