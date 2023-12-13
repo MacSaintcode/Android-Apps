@@ -2,6 +2,7 @@ package com.example.triv;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -35,7 +36,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     // this method is use to add new course to our sqlite database.
-    public void newuser(String Name, String usernames, String passcode, int Score) {
+    public boolean newuser(String Name, String usernames, String passcode, int Score) {
 
         // on below line we are creating a variable for
         // our sqlite database and calling writable method
@@ -59,6 +60,7 @@ public class DBHandler extends SQLiteOpenHelper {
         // at last we are closing our
         // database after adding database.
         db.close();
+        return false;
     }
 
     public void forgotpassword(String usernames, String passcode) {
@@ -69,10 +71,31 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
-    public boolean confirm(SQLiteDatabase db,String usernames, String passcode) {
 
-//        db.execSQL("SELECT * FROM details WHERE "+usernames +"="+ passcode);
-//        db.
+
+    public boolean confirm(String usernames, String passcode) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM details WHERE usernames = ? and password = ?", new String[] {usernames,passcode});
+        if (c.moveToNext()){
+            return true;
+        }
+
+
+
+//        while (c.moveToNext()){
+//        if (c.moveToFirst()){
+//            do {
+//                // Passing values
+//                String column1 = c.getString(0);
+//                String column2 = c.getString(1);
+//                String column3 = c.getString(2);
+//                // Do something Here with values
+//            } while(c.moveToNext());
+//        }
+//        c.close();
+//        db.close();
+//
+//        }
 
         return false;
     }

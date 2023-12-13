@@ -64,10 +64,11 @@ public class New_user extends AppCompatActivity {
 
                 } else {
 
-                    DBHandler.newuser(names,user,pass,0);
-                    Toast.makeText(New_user.this, "Registered Sucessfully", Toast.LENGTH_SHORT).show();
-                    Intent call=new Intent(New_user.this,MainMenu.class);
-                    startActivity(call);
+                    if (!DBHandler.newuser(names,user,pass,0)) {
+                        Toast.makeText(New_user.this, "Registered Sucessfully", Toast.LENGTH_SHORT).show();
+                        Intent call = new Intent(New_user.this, MainMenu.class);
+                        startActivity(call);
+                    }
                 }
             }
         });

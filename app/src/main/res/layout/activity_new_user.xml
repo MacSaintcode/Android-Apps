@@ -71,6 +71,7 @@
         android:layout_marginTop="50sp"
         android:textAlignment="center"
         android:hint="Username"
+        android:textSize="20sp"
         android:layout_marginRight="40sp"
         android:id="@+id/username"
         >
@@ -82,6 +83,7 @@
         android:layout_marginLeft="40sp"
         android:layout_marginTop="50sp"
         android:textAlignment="center"
+        android:textSize="20sp"
         android:hint="Password"
         android:layout_marginRight="40sp"
         android:id="@+id/pass"
@@ -94,6 +96,7 @@
         android:layout_marginLeft="40sp"
         android:layout_marginTop="50sp"
         android:textAlignment="center"
+        android:textSize="20sp"
         android:hint="Confirm Password"
         android:layout_marginRight="40sp"
         android:id="@+id/cpass">

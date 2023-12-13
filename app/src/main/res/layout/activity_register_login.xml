@@ -72,6 +72,7 @@
             android:hint="Password"
             android:layout_marginRight="40sp"
             android:id="@id/passcode"
+            android:textSize="20sp"
             >
         </EditText>
         <TextView
