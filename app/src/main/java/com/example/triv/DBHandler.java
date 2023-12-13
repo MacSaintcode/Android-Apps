@@ -38,10 +38,17 @@ public class DBHandler extends SQLiteOpenHelper {
     // this method is use to add new course to our sqlite database.
     public boolean newuser(String Name, String usernames, String passcode, int Score) {
 
+        //check if user name exist already
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM details WHERE usernames = ?", new String[] {usernames});
+        if (c.moveToNext()){
+            return true;
+        }
+
         // on below line we are creating a variable for
         // our sqlite database and calling writable method
         // as we are writing data in our database.
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
 
         // on below line we are creating a
         // variable for content values.
@@ -63,15 +70,16 @@ public class DBHandler extends SQLiteOpenHelper {
         return false;
     }
 
-    public void forgotpassword(String usernames, String passcode) {
-
+    public boolean forgotpassword(String usernames, String passcode) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM details WHERE usernames = ?", new String[] {usernames,passcode});
+        if (c.moveToNext()){
+            db = this.getWritableDatabase();
+            c = db.rawQuery("Update details set password = ? WHERE usernames = ?", new String[] {passcode,usernames});
+            return true;
+        }
+        return false;
     }
-
-    public void userchecker(String usernames) {
-
-    }
-
-
 
     public boolean confirm(String usernames, String passcode) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -79,9 +87,6 @@ public class DBHandler extends SQLiteOpenHelper {
         if (c.moveToNext()){
             return true;
         }
-
-
-
 //        while (c.moveToNext()){
 //        if (c.moveToFirst()){
 //            do {

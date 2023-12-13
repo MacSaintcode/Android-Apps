@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -68,6 +69,9 @@ public class New_user extends AppCompatActivity {
                         Toast.makeText(New_user.this, "Registered Sucessfully", Toast.LENGTH_SHORT).show();
                         Intent call = new Intent(New_user.this, MainMenu.class);
                         startActivity(call);
+                    }else {
+                        username.setHint("User Already Exist!");
+                        username.setHintTextColor(Color.RED);
                     }
                 }
             }

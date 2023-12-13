@@ -41,6 +41,8 @@ public class ForgotPassword extends AppCompatActivity {
                 startActivity(call);
             }
         });
+
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,6 +53,7 @@ public class ForgotPassword extends AppCompatActivity {
                     Toast.makeText(ForgotPassword.this, "Password Does not match!", Toast.LENGTH_SHORT).show();
 
                 } else {
+
                     Intent call=new Intent(ForgotPassword.this,register_login.class);
                     startActivity(call);
             }}
