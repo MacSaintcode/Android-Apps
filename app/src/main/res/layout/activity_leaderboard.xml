@@ -32,7 +32,6 @@
             android:layout_height="match_parent"
             android:src="@drawable/anoda1"
             android:layout_toLeftOf="@+id/Questionshead"
-            android:layout_marginLeft="7sp"
             android:focusable="false"
             android:alpha="0.7">
         </ImageView>
@@ -42,43 +41,253 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Trivia"
+            android:text="Leaderboard"
             android:textSize="25sp"
             android:textStyle="bold" />
 
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="100">
+
+        <TextView
+            android:id="@+id/top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="10dp"
+            android:text="Top 10"
+            android:textColor="@color/Gold"
+            android:textSize="35sp"
+            android:shadowColor="@color/blue"
+            android:shadowRadius="10"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TableLayout
             android:id="@+id/table"
-            android:layout_marginTop="60sp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:textAlignment="center"
-            >
+            android:textAlignment="center">
 
             <TableRow>
+
                 <TextView
                     android:id="@+id/nam"
-                    android:text="Name"
-                    android:textSize="19sp"
                     android:padding="10dp"
-                    android:textStyle="bold"/>
+                    android:text="Nathan"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/sco"
-                    android:textStyle="bold"
-                    android:padding="10sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="19sp"
-                    android:text="gfg"
-                    />
+                    android:padding="10sp"
+                    android:text="20"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
             </TableRow>
 
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/nam1"
+                    android:padding="10dp"
+                    android:text="Nathan"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sco1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10sp"
+                    android:text="20"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/nam2"
+                    android:padding="10dp"
+                    android:text="Nathan"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sco2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10sp"
+                    android:text="20"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/nam3"
+                    android:padding="10dp"
+                    android:text="Nathan"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sco3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10sp"
+                    android:text="20"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/nam4"
+                    android:padding="10dp"
+                    android:text="Nathan"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sco4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10sp"
+                    android:text="20"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/nam5"
+                    android:padding="10dp"
+                    android:text="Nathan"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sco5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10sp"
+                    android:text="20"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/nam6"
+                    android:padding="10dp"
+                    android:text="Nathan"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sco6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10sp"
+                    android:text="20"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/nam7"
+                    android:padding="10dp"
+                    android:text="Nathan"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sco7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10sp"
+                    android:text="20"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/nam8"
+                    android:padding="10dp"
+                    android:text="Nathan"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sco8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10sp"
+                    android:text="20"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/nam9"
+                    android:padding="10dp"
+                    android:text="Nathan"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sco9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10sp"
+                    android:text="20"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/nam10"
+                    android:padding="10dp"
+                    android:text="Nathan"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sco10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10sp"
+                    android:text="20"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </TableRow>
 
 
         </TableLayout>

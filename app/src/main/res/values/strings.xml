@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">triv</string>
-    <string name="answer4">???</string>
-    <string name="answer3">???</string>
-    <string name="answer2">???</string>
-    <string name="answer1">???</string>
+    <string name="answer4">hj</string>
+    <string name="answer3">hj</string>
+    <string name="answer2">hj</string>
+    <string name="answer1">hj</string>
     <string name="question">Question No.</string>
-    <string name="questionair">???</string>
+    <string name="questionair">Ask?</string>
     <string name="countdown">15</string>
     <string name="trivia_leaderboard">Trivia Leaderboard</string>
-    <string name="score">20</string>
+    <string name="score">0</string>
     <string name="scoretext">Score: </string>
     <string name="forgot_password">Forgot Password</string>
     <string name="signup">Signup</string>

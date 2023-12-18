@@ -16,7 +16,7 @@ public class New_user extends AppCompatActivity {
 
     ImageView back;
     private EditText name;
-    private EditText username;
+    EditText username;
     private EditText password;
     private EditText cpassword;
 
@@ -45,18 +45,15 @@ public class New_user extends AppCompatActivity {
         password = findViewById(R.id.pass);
         name = findViewById(R.id.name);
         username = findViewById(R.id.username);
+        DBHandler = new DBHandler(this);
 
-        String cpass=post.getText().toString();
-       String pass=password.getText().toString();
-       String names = name.getText().toString();
-       String user=username.getText().toString();
-
-       click(cpass,pass,names,user);
-    }
-    void click(String cpass, String pass,String names, String user){
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String cpass=cpassword.getText().toString();
+                String pass=password.getText().toString();
+                String names = name.getText().toString();
+                String user=username.getText().toString();
                 if(pass.isEmpty()|| user.isEmpty()||names.isEmpty()||cpass.isEmpty()){
                     Toast.makeText(New_user.this, "All field must be filled", Toast.LENGTH_SHORT).show();
 
@@ -67,9 +64,10 @@ public class New_user extends AppCompatActivity {
 
                     if (!DBHandler.newuser(names,user,pass,0)) {
                         Toast.makeText(New_user.this, "Registered Sucessfully", Toast.LENGTH_SHORT).show();
-                        Intent call = new Intent(New_user.this, MainMenu.class);
+                        Intent call = new Intent(New_user.this, register_login.class);
                         startActivity(call);
                     }else {
+                        username.setText("");
                         username.setHint("User Already Exist!");
                         username.setHintTextColor(Color.RED);
                     }

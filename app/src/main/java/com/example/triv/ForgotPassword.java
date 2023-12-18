@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,21 +20,20 @@ public class ForgotPassword extends AppCompatActivity {
     EditText cpass;
     EditText username;
     Button btn;
+    private DBHandler DBHandler;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_login);
+        setContentView(R.layout.activity_forgot_password);
 
         back=findViewById(R.id.back);
         username=findViewById(R.id.users);
         cpass=findViewById(R.id.cpassword);
         pass=findViewById(R.id.password);
         btn=findViewById(R.id.btnchange);
-
-        String passs=pass.getText().toString();
-        String Use=username.getText().toString();
-        String cpasss=cpass.getText().toString();
+        DBHandler = new DBHandler(this);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,21 +43,35 @@ public class ForgotPassword extends AppCompatActivity {
             }
         });
 
-
         btn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                if(passs.isEmpty()|| Use.isEmpty()||cpasss.isEmpty() ){
+
+                if(pass.getText().toString().isEmpty()|| username.getText().toString().isEmpty()||cpass.getText().toString().isEmpty() ){
                     Toast.makeText(ForgotPassword.this, "All fields must be filled", Toast.LENGTH_SHORT).show();
 
-                } else if (!passs.equals(cpasss)) {
+                } else if (!pass.getText().toString().equals(cpass.getText().toString())) {
                     Toast.makeText(ForgotPassword.this, "Password Does not match!", Toast.LENGTH_SHORT).show();
 
-                } else {
-
-                    Intent call=new Intent(ForgotPassword.this,register_login.class);
-                    startActivity(call);
-            }}
+                }
+                else {
+                    if (DBHandler.forgotpassword(username.getText().toString(),pass.getText().toString())){
+                        Toast.makeText(ForgotPassword.this, "Password Changed!", Toast.LENGTH_SHORT).show();
+                        Intent call=new Intent(ForgotPassword.this,register_login.class);
+                        startActivity(call);
+                    } else if (DBHandler.check(username.getText().toString(),pass.getText().toString())) {
+                        Toast.makeText(ForgotPassword.this, "Use a different password!", Toast.LENGTH_SHORT).show();
+                        cpass.setText("");
+                        pass.setText("");
+                        
+                    } else{
+                        username.setText("");
+                        username.setHint("User Does Not Exist!");
+                        username.setHintTextColor(Color.RED);
+                    }
+            }
+        }
         });
 
     }

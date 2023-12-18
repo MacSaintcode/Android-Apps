@@ -22,6 +22,7 @@ public class register_login extends AppCompatActivity {
 
     Button login;
     private DBHandler DBHandler;
+    int n=5;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -35,6 +36,7 @@ public class register_login extends AppCompatActivity {
         login=findViewById(R.id.login);
         users=findViewById(R.id.user);
         passcod=findViewById(R.id.passcode);
+        DBHandler = new DBHandler(this);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,11 +65,24 @@ public class register_login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //check if user exist in db first
-                if (DBHandler.confirm(users.getText().toString(),passcod.getText().toString())){
+
+                if(users.getText().toString().isEmpty()||passcod.getText().toString().isEmpty()){
+                    Toast.makeText(register_login.this, "All fields must be filled!", Toast.LENGTH_SHORT).show();
+                }
+                else if (DBHandler.confirm(users.getText().toString(),passcod.getText().toString())){
                     Intent call=new Intent(register_login.this,MainActivity.class);
                     startActivity(call);
-                }else {
+                }
+                else {
+                    n--;
                     Toast.makeText(register_login.this, "User Does Not Exist!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(register_login.this, "You Have "+n+" More Tries!", Toast.LENGTH_SHORT).show();
+
+                }
+                if (n==0){
+                    Toast.makeText(register_login.this, "User Does Not Exist!", Toast.LENGTH_SHORT).show();
+                    Intent call=new Intent(register_login.this,MainMenu.class);
+                    startActivity(call);
                 }
             }
         });

@@ -19,7 +19,10 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        backgroundmusic();
+        play=findViewById(R.id.play);
+        leaderboard=findViewById(R.id.leader);
+
+//        backgroundmusic();
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,18 +38,18 @@ public class MainMenu extends AppCompatActivity {
             }
         });
     }
-    void backgroundmusic(){
-        MediaPlayer mp=new MediaPlayer();
-        try {
-            mp.setDataSource("C:/Users/Saintcoded/AndroidStudioProjects/triv/app/src/main/res/drawable/snop.mp3");
-            mp.prepare();
-            mp.start();
-            mp.setLooping(true);
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-    }
+//    void backgroundmusic(){
+//        MediaPlayer mp=new MediaPlayer();
+//        try {
+//            mp.setDataSource("C:/Users/Saintcoded/AndroidStudioProjects/triv/app/src/main/res/drawable/snop.mp3");
+//            mp.prepare();
+//            mp.start();
+//            mp.setLooping(true);
+//        }catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
+//
+//    }
 //    System.exit();
 }
