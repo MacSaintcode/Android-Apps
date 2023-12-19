@@ -24,5 +24,7 @@
     <color name="DarkViolet">#9400D3</color>G
     <color name="LightCoral">#F08080</color>
     <color name="MediumPurple">#9370DB</color>
+    <color name="Purple">#800080</color>
+
 
 </resources>

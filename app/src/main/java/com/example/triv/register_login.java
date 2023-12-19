@@ -23,8 +23,6 @@ public class register_login extends AppCompatActivity {
     Button login;
     private DBHandler DBHandler;
     int n=5;
-
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,15 +73,16 @@ public class register_login extends AppCompatActivity {
                 }
                 else {
                     n--;
-                    Toast.makeText(register_login.this, "User Does Not Exist!", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(register_login.this, "You Have "+n+" More Tries!", Toast.LENGTH_SHORT).show();
+                    if (n==0){
+                        Toast.makeText(register_login.this, "User Does Not Exist!", Toast.LENGTH_SHORT).show();
+                        Intent call=new Intent(register_login.this,MainMenu.class);
+                        startActivity(call);
+                    }else {
+                        Toast.makeText(register_login.this, "User Does Not Exist!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(register_login.this, "You Have " + n + " More Tries!", Toast.LENGTH_SHORT).show();
+                    }
+                }
 
-                }
-                if (n==0){
-                    Toast.makeText(register_login.this, "User Does Not Exist!", Toast.LENGTH_SHORT).show();
-                    Intent call=new Intent(register_login.this,MainMenu.class);
-                    startActivity(call);
-                }
             }
         });
 
