@@ -21,9 +21,7 @@ public class Leaderboard extends AppCompatActivity {
         back=findViewById(R.id.back);
         scores=findViewById(R.id.sco);
         user=findViewById(R.id.nam);
-
 //        13 top players
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -31,8 +29,5 @@ public class Leaderboard extends AppCompatActivity {
                 startActivity(call);
             }
         });
-
-
-
     }
 }

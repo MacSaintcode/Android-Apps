@@ -85,7 +85,7 @@
                 <TextView
                     android:id="@+id/nam"
                     android:padding="10dp"
-                    android:text="Nathan"
+                    android:text="Nthan"
                     android:textSize="25sp"
                     android:textStyle="bold" />
 
