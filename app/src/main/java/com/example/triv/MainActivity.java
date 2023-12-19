@@ -157,11 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 // Revert button color to default after the delay
                 myButton.setBackgroundColor(Color.rgb(106, 90, 205));
                 starttimer();
-
                 QandA();
-
-
-
             }
         }, 2000);
         if(QandA()){
@@ -240,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
         timescrol.setProgress(second);
 
         if(second==0){
-            movement(correction());
+            check(correction());
         }
     }
 
