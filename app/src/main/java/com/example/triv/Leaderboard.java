@@ -8,13 +8,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
 public class Leaderboard extends AppCompatActivity {
 
     private ImageView back;
     private TextView user;
     private TextView scores;
     private DBHandler dbHandler;
-    String arr[][];
+    String arr[][]={};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,5 +37,6 @@ public class Leaderboard extends AppCompatActivity {
             }
         });
         user.setText(arr[0][0]);
+        scores.setText(arr[0][1]);
     }
 }

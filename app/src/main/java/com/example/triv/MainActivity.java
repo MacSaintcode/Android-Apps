@@ -130,6 +130,9 @@ public class MainActivity extends AppCompatActivity {
     void check(Button btn){
         if(!movement(btn)){
             Intent ca=new Intent(MainActivity.this,congrats.class);
+            register_login u=new register_login();
+            dbHandler.updatescore(u.use,score.getText().toString());
+
             startActivity(ca);
         }
 
@@ -157,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
                 // Revert button color to default after the delay
                 myButton.setBackgroundColor(Color.rgb(106, 90, 205));
                 starttimer();
-                QandA();
             }
         }, 2000);
         if(QandA()){

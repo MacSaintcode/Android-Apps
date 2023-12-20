@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class register_login extends AppCompatActivity {
-
+public String use;
     private ImageView back;
     private TextView forgot;
     private TextView account;
@@ -69,7 +69,9 @@ public class register_login extends AppCompatActivity {
                 }
                 else if (DBHandler.confirm(users.getText().toString(),passcod.getText().toString())){
                     Intent call=new Intent(register_login.this,MainActivity.class);
+                    use=users.getText().toString();
                     startActivity(call);
+
                 }
                 else {
                     n--;

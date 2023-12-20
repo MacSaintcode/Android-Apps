@@ -108,7 +108,7 @@ public class DBHandler extends SQLiteOpenHelper {
         String ar[]={user,score};
         String arr[][]={};
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM details order by Score ASC limit 10", new String[] {});
+        Cursor c = db.rawQuery("SELECT * FROM details order by Score ASC limit 1", new String[] {});
         while (c.moveToNext()){
             if (c.moveToFirst()){
                 do {
@@ -136,6 +136,14 @@ public class DBHandler extends SQLiteOpenHelper {
         c.close();
         db.close();
         return false;
+    }
+    void updatescore(String username,String score){
+        SQLiteDatabase db = this.getReadableDatabase();
+        int sc=Integer.parseInt(score);
+        db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("Score",sc);
+        db.update("details",values,"usernames = ?",new String[] {username});
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
