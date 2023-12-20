@@ -15,11 +15,11 @@ import android.widget.Toast;
 
 public class ForgotPassword extends AppCompatActivity {
 
-    ImageView back;
-    EditText pass;
-    EditText cpass;
-    EditText username;
-    Button btn;
+    private ImageView back;
+    private EditText pass;
+    private EditText cpass;
+    private EditText username;
+    private Button btn;
     private DBHandler DBHandler;
 
     @SuppressLint("MissingInflatedId")

@@ -10,9 +10,11 @@ import android.widget.TextView;
 
 public class Leaderboard extends AppCompatActivity {
 
-    ImageView back;
-    TextView user;
-    TextView scores;
+    private ImageView back;
+    private TextView user;
+    private TextView scores;
+    private DBHandler dbHandler;
+    String arr[][];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +23,9 @@ public class Leaderboard extends AppCompatActivity {
         back=findViewById(R.id.back);
         scores=findViewById(R.id.sco);
         user=findViewById(R.id.nam);
+        scores=findViewById(R.id.sco);
+
+        arr=dbHandler.getleaders();
 //        13 top players
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,5 +34,6 @@ public class Leaderboard extends AppCompatActivity {
                 startActivity(call);
             }
         });
+        user.setText(arr[0][0]);
     }
 }

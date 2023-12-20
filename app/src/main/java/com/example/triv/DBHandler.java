@@ -100,20 +100,32 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
         return false;
     }
-    public void getleaders(){
+    public String[][] getleaders(){
+        int n=0;
+        int i;
+        String user="";
+        String score="";
+        String ar[]={user,score};
+        String arr[][]={};
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT names and Score FROM details order by Score ASC ", new String[] {});
+        Cursor c = db.rawQuery("SELECT * FROM details order by Score ASC limit 10", new String[] {});
         while (c.moveToNext()){
             if (c.moveToFirst()){
                 do {
                     // Passing values
-                    String user = c.getString(2);
-                    String score = c.getString(4);
+                     user= c.getString(2);
+                     score= c.getString(4);
+
+                    for(i=0;i<2;i++){
+                        arr[n][i]=ar[i];
+                    }
+                    n++;
                 } while(c.moveToNext());
             }
         c.close();
         db.close();
         }
+        return arr;
     }
     public boolean confirm(String usernames, String passcode) {
         SQLiteDatabase db = this.getReadableDatabase();

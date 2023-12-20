@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.VideoView;
 
 public class congrats extends AppCompatActivity {
-    Button go;
-    VideoView view;
+    private Button go;
+    private VideoView view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

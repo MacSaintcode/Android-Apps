@@ -14,14 +14,14 @@ import android.widget.Toast;
 
 public class New_user extends AppCompatActivity {
 
-    ImageView back;
+    private ImageView back;
     private EditText name;
     EditText username;
     private EditText password;
     private EditText cpassword;
 
     private DBHandler DBHandler;
-     Button post;
+    private Button post;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

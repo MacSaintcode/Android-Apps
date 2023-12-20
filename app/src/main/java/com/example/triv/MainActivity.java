@@ -16,16 +16,16 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView counttext;
+    private TextView counttext;
 
-    TextView score;
-    TextView head;
-    TextView question;
-    Button Answer1;
-    Button Answer2;
-    Button Answer3;
-    Button Answer4;
-    ProgressBar timescrol;
+    private TextView score;
+    private TextView head;
+    private TextView question;
+    private Button Answer1;
+    private Button Answer2;
+    private Button Answer3;
+    private Button Answer4;
+    private ProgressBar timescrol;
     private DBHandler dbHandler;
     private CountDownTimer time;
     private long Milliseconds=15000;

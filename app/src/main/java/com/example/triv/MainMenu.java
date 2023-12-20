@@ -11,8 +11,8 @@ import android.widget.Button;
 
 public class MainMenu extends AppCompatActivity {
 
-    Button play;
-    Button leaderboard;
+    private Button play;
+    private Button leaderboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -14,13 +14,13 @@ import android.widget.Toast;
 
 public class register_login extends AppCompatActivity {
 
-    ImageView back;
-    TextView forgot;
-    TextView account;
-    EditText passcod;
-    EditText users;
+    private ImageView back;
+    private TextView forgot;
+    private TextView account;
+    private  EditText passcod;
+    private EditText users;
 
-    Button login;
+    private Button login;
     private DBHandler DBHandler;
     int n=5;
     @Override
