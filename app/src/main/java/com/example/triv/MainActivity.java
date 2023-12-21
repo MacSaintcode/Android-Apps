@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private CountDownTimer time;
     private long Milliseconds=15000;
     boolean running=true;
+    boolean cal = true;
 //    String name= new register_login().users.getText().toString();
     String questarr[]={"What is the name of the worlds largest ocean",
         "What is the approximate ratio of people to sheep in New Zealand?",
@@ -119,8 +120,6 @@ public class MainActivity extends AppCompatActivity {
                     Answer4.setBackgroundColor(Color.RED);
                 }
                 check(Answer4);
-
-
             }
         });
             starttimer();
@@ -128,11 +127,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
     void check(Button btn){
+        //          congratulations on finising the trivial questions
+//           trigger intent to go back to main menu
         if(!movement(btn)){
             Intent ca=new Intent(MainActivity.this,congrats.class);
-            register_login u=new register_login();
-            dbHandler.updatescore(u.use,score.getText().toString());
-
+            register_login u = new register_login();
+//            dbHandler.updatescore("44",score.getText().toString());
             startActivity(ca);
         }
 
@@ -145,11 +145,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     boolean movement(Button myButton){
+        cal = true;
+//CHANGE QUESTIONS AND ANSWER
+        //CHANGE BUTTON COLOR SET BUTTON TO UNCLICKABLE WEN AN ANSWER IS CHOSSEN
         Button arr[]={Answer1,Answer2,Answer3,Answer4};
         for (int i = 0; i < 4; i++) {
             arr[i].setClickable(false);
         }
         time.cancel();
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -160,19 +164,25 @@ public class MainActivity extends AppCompatActivity {
                 // Revert button color to default after the delay
                 myButton.setBackgroundColor(Color.rgb(106, 90, 205));
                 starttimer();
+
+                if(QandA()){
+                    ci++;
+                    cal = true;
+                }else{
+                    cal =false;
+//                    Intent ca=new Intent(MainActivity.this,congrats.class);
+//                    startActivity(ca);
+                }
             }
         }, 2000);
-        if(QandA()){
-            ci++;
-            return true;
-        }else{
-            Intent ca=new Intent(MainActivity.this,congrats.class);
-            startActivity(ca);
-            return false;
-        }
+
+        return cal;
     }
 
     boolean QandA(){
+        //CHECK IF IT HAS NOT GOTTEN TO THE LAST QUESTION AND CHANGE THE QUESTIONS AND ANSWERS
+        //IF IVE GOTTEN TO THE LAST QUESTION RETURN FALSE
+
         if(n!=questarr.length){
             head.setText("Question "+n);
             question.setText(questarr[n-1]);
@@ -182,12 +192,8 @@ public class MainActivity extends AppCompatActivity {
             }
             n++;
             return true;
-
         }else{
-
             return false;
-//          congratulations on finising the trivial questions
-//           trigger intent to go back to main menu
         }
     }
     void starttimer(){

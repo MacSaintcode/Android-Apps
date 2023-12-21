@@ -138,9 +138,9 @@ public class DBHandler extends SQLiteOpenHelper {
         return false;
     }
     void updatescore(String username,String score){
-        SQLiteDatabase db = this.getReadableDatabase();
+
         int sc=Integer.parseInt(score);
-        db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("Score",sc);
         db.update("details",values,"usernames = ?",new String[] {username});
