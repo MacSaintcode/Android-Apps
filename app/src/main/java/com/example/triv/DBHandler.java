@@ -78,7 +78,10 @@ public class DBHandler extends SQLiteOpenHelper {
             String pass = c.getString(3);
             if (pass.equals(passcode)){
                 return true;
-            }}
+            }
+        }
+        c.close();
+        db.close();
         return  false;
     }
     public boolean forgotpassword(String usernames, String passcode) {
@@ -100,32 +103,17 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
         return false;
     }
-    public String[][] getleaders(){
+    public Cursor getleaders(){
         int n=0;
         int i;
         String user="";
         String score="";
-        String ar[]={user,score};
+        String ar[];
         String arr[][]={};
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM details order by Score ASC limit 1", new String[] {});
-        while (c.moveToNext()){
-            if (c.moveToFirst()){
-                do {
-                    // Passing values
-                     user= c.getString(2);
-                     score= c.getString(4);
+        Cursor c = db.rawQuery("SELECT * FROM details order by Score desc Limit 10", new String[] {});
 
-                    for(i=0;i<2;i++){
-                        arr[n][i]=ar[i];
-                    }
-                    n++;
-                } while(c.moveToNext());
-            }
-        c.close();
-        db.close();
-        }
-        return arr;
+        return c;
     }
     public boolean confirm(String usernames, String passcode) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -138,12 +126,12 @@ public class DBHandler extends SQLiteOpenHelper {
         return false;
     }
     void updatescore(String username,String score){
-
         int sc=Integer.parseInt(score);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("Score",sc);
         db.update("details",values,"usernames = ?",new String[] {username});
+        db.close();
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

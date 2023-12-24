@@ -68,8 +68,10 @@ public String use;
                     Toast.makeText(register_login.this, "All fields must be filled!", Toast.LENGTH_SHORT).show();
                 }
                 else if (DBHandler.confirm(users.getText().toString(),passcod.getText().toString())){
-                    Intent call=new Intent(register_login.this,MainActivity.class);
+                    Intent call;
                     use=users.getText().toString();
+                    call=new Intent(register_login.this,MainActivity.class);
+                    call.putExtra("username",use);
                     startActivity(call);
 
                 }

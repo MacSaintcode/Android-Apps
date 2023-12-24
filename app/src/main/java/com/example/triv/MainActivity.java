@@ -3,6 +3,7 @@ package com.example.triv;
 import androidx.appcompat.app.AppCompatActivity;
 import  java.lang.Object;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -15,9 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
     private TextView counttext;
-
     private TextView score;
     private TextView head;
     private TextView question;
@@ -25,13 +24,13 @@ public class MainActivity extends AppCompatActivity {
     private Button Answer2;
     private Button Answer3;
     private Button Answer4;
+    private Button confirm;
     private ProgressBar timescrol;
-    private DBHandler dbHandler;
+    DBHandler dbHandler;
     private CountDownTimer time;
     private long Milliseconds=15000;
-    boolean running=true;
-    boolean cal = true;
-//    String name= new register_login().users.getText().toString();
+
+
     String questarr[]={"What is the name of the worlds largest ocean",
         "What is the approximate ratio of people to sheep in New Zealand?",
         "What is the only continent that does not have any active volcanoes?",
@@ -42,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         "Who is the author of the Harry Potter series",
 //        "What is the capital of Australia"
     };
+
     String answer[][]={{"Pacific Ocean","Atlantic Ocean","River Jordan","Meridian Ocean"},
             {"7 people per 1 sheep","3 people per 1 sheep", "1 people per 1 sheep","1 people per 3 sheep",},
             {"Australia","Europe","Africa","Asia"},{"A","I","O","E"},
@@ -49,9 +49,15 @@ public class MainActivity extends AppCompatActivity {
             {"Antarctic","Zahara","Cairo","Swiele"},
             {"Jason Stark" ,"Christian Storm","J.K.Rowling","Britney Spares"}};
 
-    String rans[]={"Pacific Ocean","1 people per 1 sheep","Australia","E","Vatican City","Switzerland","Antarctic"};
+    String rans[]={"Pacific Ocean","1 people per 1 sheep","Australia",
+            "E","Vatican City","Switzerland","Antarctic","J.K.Rowling"};
+
     int n=1;
     int ci=0;
+    Button chossen;
+    Intent ca;
+
+    String sc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,77 +72,110 @@ public class MainActivity extends AppCompatActivity {
         head=findViewById(R.id.Questionshead);
         question=findViewById(R.id.Questions);
         score=findViewById(R.id.score);
+        confirm=findViewById(R.id.confirm);
+        dbHandler = new DBHandler(this);
+        ca = getIntent();
+        sc= ca.getStringExtra("username");
 
 
 
         Answer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                time.cancel();
-                if (Answer1.getText().toString().equalsIgnoreCase(rans[ci])){
-                    addpoint();
-                    Answer1.setBackgroundColor(Color.GREEN);
-                }else{
-                    Answer1.setBackgroundColor(Color.RED);
-                }
-                check(Answer1);
+                chos(Answer1);
+//
             }
         });
         Answer2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                time.cancel();
-                if (Answer2.getText().toString().equalsIgnoreCase(rans[ci])){
-                    addpoint();
-                    Answer2.setBackgroundColor(Color.GREEN);
-                }else{
-                    Answer2.setBackgroundColor(Color.RED);
-                }
-                check(Answer2);
-
+                chos(Answer2);
             }
 
         });
         Answer3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Answer3.getText().toString().equalsIgnoreCase(rans[ci])){
-                    addpoint();
-                    Answer3.setBackgroundColor(Color.GREEN);
-                }else{
-                    Answer3.setBackgroundColor(Color.RED);
-                }
-                check(Answer3);
+                chos(Answer3);
             }
         });
         Answer4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                chos(Answer4);
+            }
+        });
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 time.cancel();
-                if (Answer4.getText().toString().equalsIgnoreCase(rans[ci])){
+                if (chossen.getText().toString().equalsIgnoreCase(rans[ci])){
                     addpoint();
-                    Answer4.setBackgroundColor(Color.GREEN);
+                    chossen.setBackgroundColor(Color.GREEN);
                 }else{
-                    Answer4.setBackgroundColor(Color.RED);
+                    chossen.setBackgroundColor(Color.RED);
                 }
-                check(Answer4);
+                wat();
             }
         });
             starttimer();
             QandA();
 
     }
-    void check(Button btn){
-        //          congratulations on finising the trivial questions
-//           trigger intent to go back to main menu
-        if(!movement(btn)){
-            Intent ca=new Intent(MainActivity.this,congrats.class);
-            register_login u = new register_login();
-//            dbHandler.updatescore("44",score.getText().toString());
-            startActivity(ca);
+    void wat(){
+        Button[] arr ={Answer1,Answer2,Answer3,Answer4,confirm};
+        for (int i = 0; i < arr.length-1; i++) {
+            arr[i].setClickable(false);
         }
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Revert button color to default after the delay
+                for (int i = 0; i < arr.length-1; i++) {
+                   arr[i].setBackgroundColor(Color.rgb(106, 90, 205));
+                }
+                confirm.setClickable(true);
 
+                if(!check()){
+                    Button[] arr ={Answer1,Answer2,Answer3,Answer4,confirm};
+                    for (int i = 0; i < 4; i++) {
+                        arr[i].setClickable(true);
+                    }
+                    time.start();
+
+                }else {
+                    ca=new Intent(MainActivity.this,congrats.class);
+                    startActivity(ca);
+
+                }
+
+                }
+
+        }, 1000);
     }
+    boolean check(){
+//      congratulations on finising the trivial questions
+//      trigger intent to go back to main menu
+        if(!movement()){
+            String scor=score.getText().toString();
+            dbHandler.updatescore(sc,scor);
+            return true;
+        }
+        return false;
+    }
+    void chos(Button btn){
+        btn.setBackgroundColor(Color.BLUE);
+        Button[] arr ={Answer1,Answer2,Answer3,Answer4};
+        for (int i = 0; i < 4; i++) {
+            if(arr[i]!=btn){
+                arr[i].setBackgroundColor(Color.rgb(106, 90, 205));
+            }
+        }
+        confirm.setVisibility(View.VISIBLE);
+        chossen=btn;
+    }
+
     void addpoint(){
         int sco=Integer.parseInt(score.getText().toString());
         sco+=5;
@@ -144,52 +183,28 @@ public class MainActivity extends AppCompatActivity {
         score.setText(got);
     }
 
-    boolean movement(Button myButton){
-        cal = true;
-//CHANGE QUESTIONS AND ANSWER
-        //CHANGE BUTTON COLOR SET BUTTON TO UNCLICKABLE WEN AN ANSWER IS CHOSSEN
-        Button arr[]={Answer1,Answer2,Answer3,Answer4};
-        for (int i = 0; i < 4; i++) {
-            arr[i].setClickable(false);
+    boolean movement(){
+//      CHANGE QUESTIONS AND ANSWER
+        // Revert button color to default after the delay
+        if(QandA()){
+            ci++;
+            return true;
+        }else{
+            return false;
         }
-        time.cancel();
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 4; i++) {
-                    arr[i].setClickable(true);
-                }
-                // Revert button color to default after the delay
-                myButton.setBackgroundColor(Color.rgb(106, 90, 205));
-                starttimer();
-
-                if(QandA()){
-                    ci++;
-                    cal = true;
-                }else{
-                    cal =false;
-//                    Intent ca=new Intent(MainActivity.this,congrats.class);
-//                    startActivity(ca);
-                }
-            }
-        }, 2000);
-
-        return cal;
     }
 
     boolean QandA(){
         //CHECK IF IT HAS NOT GOTTEN TO THE LAST QUESTION AND CHANGE THE QUESTIONS AND ANSWERS
         //IF IVE GOTTEN TO THE LAST QUESTION RETURN FALSE
-
-        if(n!=questarr.length){
+        if(!(n>questarr.length)){
             head.setText("Question "+n);
             question.setText(questarr[n-1]);
-            Button arr[]={Answer1,Answer2,Answer3,Answer4};
+            Button[] arr ={Answer1,Answer2,Answer3,Answer4};
             for (int i = 0; i < 4; i++) {
                 arr[i].setText(answer[n-1][i]);
             }
+            confirm.setVisibility(View.INVISIBLE);
             n++;
             return true;
         }else{
@@ -209,10 +224,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-
             }
         }.start();
-        running=true;
 
     }
     Button correction(){
@@ -244,8 +257,12 @@ public class MainActivity extends AppCompatActivity {
         timescrol.setProgress(second);
 
         if(second==0){
-            check(correction());
+            confirm.setClickable(false);
+            time.cancel();
+            chossen=correction();
+            wat();
+
+
         }
     }
-
 }

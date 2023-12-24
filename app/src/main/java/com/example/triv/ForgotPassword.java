@@ -20,7 +20,7 @@ public class ForgotPassword extends AppCompatActivity {
     private EditText cpass;
     private EditText username;
     private Button btn;
-    private DBHandler DBHandler;
+    DBHandler DBHandler;
 
     @SuppressLint("MissingInflatedId")
     @Override
