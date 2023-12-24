@@ -147,11 +147,8 @@ public class MainActivity extends AppCompatActivity {
                 }else {
                     ca=new Intent(MainActivity.this,congrats.class);
                     startActivity(ca);
-
                 }
-
                 }
-
         }, 1000);
     }
     boolean check(){
@@ -261,8 +258,6 @@ public class MainActivity extends AppCompatActivity {
             time.cancel();
             chossen=correction();
             wat();
-
-
         }
     }
 }
