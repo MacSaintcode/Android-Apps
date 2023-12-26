@@ -3,7 +3,9 @@ package com.example.triv;
 import androidx.appcompat.app.AppCompatActivity;
 import  java.lang.Object;
 
+import android.app.AlertDialog;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -273,6 +275,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
+        new AlertDialog.Builder(this).setTitle("Exit Game").
+                setMessage("Are you sure?").setPositiveButton(
+                        "Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+
+                }).setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+
+                }).show()
+        ;
     }
 }
