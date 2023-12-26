@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     int ci=0;
     Button chossen;
     Intent ca;
+    Boolean Exit=false;
 
     String sc;
     @Override
@@ -133,6 +135,37 @@ public class MainActivity extends AppCompatActivity {
             starttimer();
             QandA();
 
+    }
+    @Override
+    public void onBackPressed() {
+        if (Exit){
+            super.onBackPressed();
+            return;
+        }
+        this.Exit=true;
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Exit=false;
+            }
+        },2000);
+
+
+
+        new AlertDialog.Builder(this).setTitle("Exit Game").
+                setMessage("Are you sure?").setPositiveButton(
+                        "Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+
+                }).show();
     }
     void wat(){
         Button[] arr ={Answer1,Answer2,Answer3,Answer4,confirm};
@@ -272,23 +305,5 @@ public class MainActivity extends AppCompatActivity {
             wat();
         }
     }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        new AlertDialog.Builder(this).setTitle("Exit Game").
-                setMessage("Are you sure?").setPositiveButton(
-                        "Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
 
-                }).setNegativeButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-
-                }).show()
-        ;
-    }
 }
