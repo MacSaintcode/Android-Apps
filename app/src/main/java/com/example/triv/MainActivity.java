@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         "In which country is it illegal to own only one guinea pig,as a lone guinea pig might get lonely?",
         "What is the name of the worlds largest desert",
         "Who is the author of the Harry Potter series",
-        "What is the smallest country in the world by land area?",
             "What is the name of the longest river in Africa?"
             ,"What is the capital city of Australia?","What is the name of the highest mountain in the solar system?"
 
@@ -53,14 +52,13 @@ public class MainActivity extends AppCompatActivity {
             {"Monaco","Vatican City","San Marino","Nauru"},{"New Jersey","Switzerland","Minniesota","Lagos"},
             {"Sahara Desert","Gobi Desert","Arabian Desert","Antarctic Desert"},
             {"Jason Stark" ,"Christian Storm","J.K.Rowling","Britney Spares"},
-            {"Monaco"," Vatican City", "San Marino","Liechtenstein"},
             {"Congo River","Nile River","Niger River","Zambezi River"},
             {"Sydney","Melbourne","Canberra","Brisbane"},
             {"Olympus Mons","Mount Everest","Mauna Kea","Mount Kilimanjaro"}};
 
     String rans[]={"Pacific Ocean","1 people per 1 sheep","Australia",
             "E","Vatican City","Switzerland","Sahara Desert","J.K.Rowling",
-            "Vatican City","Nile River","Canberra","Olympus Mons"
+            "Nile River","Canberra","Olympus Mons"
     };
 
     int n=1;
@@ -154,8 +152,6 @@ public class MainActivity extends AppCompatActivity {
             }
         },2000);
 
-
-
         new AlertDialog.Builder(this).setTitle("Exit Game").setCancelable(false).
                 setMessage("Are you sure?").setPositiveButton(
                         "Yes", new DialogInterface.OnClickListener() {
@@ -177,17 +173,17 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < arr.length-1; i++) {
             arr[i].setClickable(false);
         }
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
                 // Revert button color to default after the delay
-                chossen.setBackgroundColor(Color.rgb(106, 90, 205));
-                cchossen.setBackgroundColor(Color.rgb(106, 90, 205));
+                chossen.setBackgroundColor(Color.rgb(103, 80, 164));
+                cchossen.setBackgroundColor(Color.rgb(103, 80, 164));
                 confirm.setClickable(true);
 
                 if(!check()){
-//                    Button[] arr ={Answer1,Answer2,Answer3,Answer4,confirm};
+                    Button[] arr ={Answer1,Answer2,Answer3,Answer4,confirm};
                     for (int i = 0; i < 4; i++) {
                         arr[i].setClickable(true);
                     }
@@ -197,8 +193,8 @@ public class MainActivity extends AppCompatActivity {
                     ca=new Intent(MainActivity.this,congrats.class);
                     startActivity(ca);
                 }
-//                }
-//        }, 1000);
+                }
+        }, 1000);
     }
     boolean check(){
 //      congratulations on finising the trivial questions
@@ -212,11 +208,8 @@ public class MainActivity extends AppCompatActivity {
     }
     void chos(Button btn){
         btn.setBackgroundColor(Color.BLUE);
-        Button[] arr ={Answer1,Answer2,Answer3,Answer4};
-        for (int i = 0; i < 4; i++) {
-            if(arr[i]!=btn){
-                arr[i].setBackgroundColor(Color.rgb(106, 90, 205));
-            }
+        if (btn!=chossen){
+            chossen.setBackgroundColor(Color.rgb(103, 80, 164));
         }
         confirm.setVisibility(View.VISIBLE);
         chossen=btn;
