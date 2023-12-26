@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private CountDownTimer time;
     private long Milliseconds=15000;
 
-
     String questarr[]={"What is the name of the worlds largest ocean",
         "What is the approximate ratio of people to sheep in New Zealand?",
         "What is the only continent that does not have any active volcanoes?",
@@ -39,18 +38,27 @@ public class MainActivity extends AppCompatActivity {
         "In which country is it illegal to own only one guinea pig,as a lone guinea pig might get lonely?",
         "What is the name of the worlds largest desert",
         "Who is the author of the Harry Potter series",
-//        "What is the capital of Australia"
+        "What is the smallest country in the world by land area?",
+            "What is the name of the longest river in Africa?"
+            ,"What is the capital city of Australia?","What is the name of the highest mountain in the solar system?"
+
     };
 
     String answer[][]={{"Pacific Ocean","Atlantic Ocean","River Jordan","Meridian Ocean"},
             {"7 people per 1 sheep","3 people per 1 sheep", "1 people per 1 sheep","1 people per 3 sheep",},
             {"Australia","Europe","Africa","Asia"},{"A","I","O","E"},
             {"Monaco","Vatican City","San Marino","Nauru"},{"New Jersey","Switzerland","Minniesota","Lagos"},
-            {"Antarctic","Zahara","Cairo","Swiele"},
-            {"Jason Stark" ,"Christian Storm","J.K.Rowling","Britney Spares"}};
+            {"Sahara Desert","Gobi Desert","Arabian Desert","Antarctic Desert"},
+            {"Jason Stark" ,"Christian Storm","J.K.Rowling","Britney Spares"},
+            {"Monaco"," Vatican City", "San Marino","Liechtenstein"},
+            {"Congo River","Nile River","Niger River","Zambezi River"},
+            {"Sydney","Melbourne","Canberra","Brisbane"},
+            {"Olympus Mons","Mount Everest","Mauna Kea","Mount Kilimanjaro"}};
 
     String rans[]={"Pacific Ocean","1 people per 1 sheep","Australia",
-            "E","Vatican City","Switzerland","Antarctic","J.K.Rowling"};
+            "E","Vatican City","Switzerland","Sahara Desert","J.K.Rowling",
+            "Vatican City","Nile River","Canberra","Olympus Mons"
+    };
 
     int n=1;
     int ci=0;
@@ -76,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         dbHandler = new DBHandler(this);
         ca = getIntent();
         sc= ca.getStringExtra("username");
+
 
 
 
@@ -110,11 +119,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 time.cancel();
                 if (chossen.getText().toString().equalsIgnoreCase(rans[ci])){
-                    addpoint();
                     chossen.setBackgroundColor(Color.GREEN);
+                    addpoint();
                 }else{
                     chossen.setBackgroundColor(Color.RED);
                 }
+
                 wat();
             }
         });
@@ -127,10 +137,10 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < arr.length-1; i++) {
             arr[i].setClickable(false);
         }
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
                 // Revert button color to default after the delay
                 for (int i = 0; i < arr.length-1; i++) {
                    arr[i].setBackgroundColor(Color.rgb(106, 90, 205));
@@ -138,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 confirm.setClickable(true);
 
                 if(!check()){
-                    Button[] arr ={Answer1,Answer2,Answer3,Answer4,confirm};
+//                    Button[] arr ={Answer1,Answer2,Answer3,Answer4,confirm};
                     for (int i = 0; i < 4; i++) {
                         arr[i].setClickable(true);
                     }
@@ -148,8 +158,8 @@ public class MainActivity extends AppCompatActivity {
                     ca=new Intent(MainActivity.this,congrats.class);
                     startActivity(ca);
                 }
-                }
-        }, 1000);
+//                }
+//        }, 1000);
     }
     boolean check(){
 //      congratulations on finising the trivial questions
@@ -259,5 +269,10 @@ public class MainActivity extends AppCompatActivity {
             chossen=correction();
             wat();
         }
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
