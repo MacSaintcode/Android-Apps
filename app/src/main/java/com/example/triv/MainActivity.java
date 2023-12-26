@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     int n=1;
     int ci=0;
     Button chossen;
+    Button cchossen;
     Intent ca;
     Boolean Exit=false;
 
@@ -88,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
         dbHandler = new DBHandler(this);
         ca = getIntent();
         sc= ca.getStringExtra("username");
+        chossen=confirm;
+        cchossen=confirm;
 
 
 
@@ -138,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
+        time.cancel();
         if (Exit){
             super.onBackPressed();
             return;
@@ -152,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        new AlertDialog.Builder(this).setTitle("Exit Game").
+        new AlertDialog.Builder(this).setTitle("Exit Game").setCancelable(false).
                 setMessage("Are you sure?").setPositiveButton(
                         "Yes", new DialogInterface.OnClickListener() {
                             @Override
@@ -163,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
                         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        time.start();
                     }
 
                 }).show();
@@ -177,9 +182,8 @@ public class MainActivity extends AppCompatActivity {
 //            @Override
 //            public void run() {
                 // Revert button color to default after the delay
-                for (int i = 0; i < arr.length-1; i++) {
-                   arr[i].setBackgroundColor(Color.rgb(106, 90, 205));
-                }
+                chossen.setBackgroundColor(Color.rgb(106, 90, 205));
+                cchossen.setBackgroundColor(Color.rgb(106, 90, 205));
                 confirm.setClickable(true);
 
                 if(!check()){
@@ -301,7 +305,7 @@ public class MainActivity extends AppCompatActivity {
         if(second==0){
             confirm.setClickable(false);
             time.cancel();
-            chossen=correction();
+            cchossen=correction();
             wat();
         }
     }
