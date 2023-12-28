@@ -60,12 +60,22 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40sp"
         android:layout_marginRight="40sp"
-
         android:hint="Personal Name"
         android:textAlignment="center"
         android:textSize="20sp"
         android:id="@+id/name"
-
+        >
+    </EditText>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40sp"
+        android:layout_marginRight="40sp"
+        android:layout_marginTop="50sp"
+        android:hint="Phone Number"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:id="@+id/phone"
         >
 
     </EditText>

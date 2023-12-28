@@ -2,10 +2,15 @@ package com.example.triv;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Service;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 
@@ -13,6 +18,8 @@ public class MainMenu extends AppCompatActivity {
 
     private Button play;
     private Button leaderboard;
+    boolean Exit=false;
+    private DBHandler DBHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +29,7 @@ public class MainMenu extends AppCompatActivity {
         play=findViewById(R.id.play);
         leaderboard=findViewById(R.id.leader);
 
-//        backgroundmusic();
+
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -34,22 +41,17 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent call=new Intent(MainMenu.this,Leaderboard.class);
+
                 startActivity(call);
             }
         });
     }
-//    void backgroundmusic(){
-//        MediaPlayer mp=new MediaPlayer();
-//        try {
-//            mp.setDataSource("C:/Users/Saintcoded/AndroidStudioProjects/triv/app/src/main/res/drawable/snop.mp3");
-//            mp.prepare();
-//            mp.start();
-//            mp.setLooping(true);
-//        }catch (Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-//
-//    }
-//    System.exit();
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent call=new Intent(MainMenu.this,MainMenu.class);
+        startActivity(call);
+        finish();
+
+    }
 }

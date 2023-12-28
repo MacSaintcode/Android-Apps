@@ -19,6 +19,7 @@ public class ForgotPassword extends AppCompatActivity {
     private EditText pass;
     private EditText cpass;
     private EditText username;
+    private EditText phone;
     private Button btn;
     DBHandler DBHandler;
 
@@ -33,6 +34,7 @@ public class ForgotPassword extends AppCompatActivity {
         cpass=findViewById(R.id.cpassword);
         pass=findViewById(R.id.password);
         btn=findViewById(R.id.btnchange);
+        phone=findViewById(R.id.phone);
         DBHandler = new DBHandler(this);
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +50,7 @@ public class ForgotPassword extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(pass.getText().toString().isEmpty()|| username.getText().toString().isEmpty()||cpass.getText().toString().isEmpty() ){
+                if(pass.getText().toString().isEmpty()|| username.getText().toString().isEmpty()||cpass.getText().toString().isEmpty()||phone.getText().toString().isEmpty() ){
                     Toast.makeText(ForgotPassword.this, "All fields must be filled", Toast.LENGTH_SHORT).show();
 
                 } else if (!pass.getText().toString().equals(cpass.getText().toString())) {
@@ -56,10 +58,11 @@ public class ForgotPassword extends AppCompatActivity {
 
                 }
                 else {
-                    if (DBHandler.forgotpassword(username.getText().toString(),pass.getText().toString())){
+                    if (DBHandler.forgotpassword(username.getText().toString(),pass.getText().toString(),phone.getText().toString())){
                         Toast.makeText(ForgotPassword.this, "Password Changed!", Toast.LENGTH_SHORT).show();
                         Intent call=new Intent(ForgotPassword.this,register_login.class);
                         startActivity(call);
+
                     } else if (DBHandler.check(username.getText().toString(),pass.getText().toString())) {
                         Toast.makeText(ForgotPassword.this, "Use a different password!", Toast.LENGTH_SHORT).show();
                         cpass.setText("");
@@ -75,5 +78,11 @@ public class ForgotPassword extends AppCompatActivity {
         });
 
     }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent cal=new Intent(ForgotPassword.this,register_login.class);
+        startActivity(cal);
+        finish();
+    }
 }

@@ -19,16 +19,24 @@ public class New_user extends AppCompatActivity {
     EditText username;
     private EditText password;
     private EditText cpassword;
+    private EditText phone;
 
     private DBHandler DBHandler;
     private Button post;
-    @SuppressLint("MissingInflatedId")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user);
 
         back=findViewById(R.id.back);
+        post = findViewById(R.id.post);
+        cpassword = findViewById(R.id.cpass);
+        password = findViewById(R.id.pass);
+        name = findViewById(R.id.name);
+        username = findViewById(R.id.username);
+        phone=findViewById(R.id.phone);
+        DBHandler = new DBHandler(this);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,15 +46,6 @@ public class New_user extends AppCompatActivity {
             }
         });
 
-
-
-        post = findViewById(R.id.post);
-        cpassword = findViewById(R.id.cpass);
-        password = findViewById(R.id.pass);
-        name = findViewById(R.id.name);
-        username = findViewById(R.id.username);
-        DBHandler = new DBHandler(this);
-
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,6 +53,7 @@ public class New_user extends AppCompatActivity {
                 String pass=password.getText().toString();
                 String names = name.getText().toString();
                 String user=username.getText().toString();
+                String phon=phone.getText().toString();
                 if(pass.isEmpty()|| user.isEmpty()||names.isEmpty()||cpass.isEmpty()){
                     Toast.makeText(New_user.this, "All field must be filled", Toast.LENGTH_SHORT).show();
 
@@ -62,19 +62,21 @@ public class New_user extends AppCompatActivity {
 
                 } else {
 
-                    if (!DBHandler.newuser(names,user,pass,0)) {
+                    if (!DBHandler.newuser(names,user,pass,0,phon,phone,username)) {
                         Toast.makeText(New_user.this, "Registered Sucessfully", Toast.LENGTH_SHORT).show();
                         Intent call = new Intent(New_user.this, register_login.class);
                         startActivity(call);
-                    }else {
-                        username.setText("");
-                        username.setHint("User Already Exist!");
-                        username.setHintTextColor(Color.RED);
                     }
                 }
             }
         });
 
     }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent cal=new Intent(New_user.this,register_login.class);
+        startActivity(cal);
+        finish();
+    }
 }

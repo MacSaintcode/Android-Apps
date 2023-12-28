@@ -5,12 +5,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Color;
+import android.widget.TextView;
+
+import java.util.regex.Pattern;
 
 public class DBHandler extends SQLiteOpenHelper {
 
     // creating a constant variables for our database.
     // below variable is for our database name.
-    private static final String DB_NAME = "Users";
+    private static final String DB_NAME = "details";
 
 
     // below int is our database version
@@ -28,19 +32,30 @@ public class DBHandler extends SQLiteOpenHelper {
         // an sqlite query and we are
         // setting our column names
         // along with their data types.
-        String query = "CREATE TABLE if not exists details  ( id INTEGER PRIMARY KEY AUTOINCREMENT, names TEXT,usernames TEXT UNIQUE,password TEXT,Score INTEGER default(0))";
-
+        String query = "CREATE TABLE details ( id INTEGER PRIMARY KEY AUTOINCREMENT, names TEXT,usernames TEXT UNIQUE,password TEXT,Score INTEGER default(0),phonenumber TEXT not null)";
+//        if not exists
         // at last we are calling a exec sql
         // method to execute above sql query
         db.execSQL(query);
     }
 
     // this method is use to add new course to our sqlite database.
-    public boolean newuser(String Name, String usernames, String passcode, int Score) {
+    public boolean newuser(String Name, String usernames, String passcode, int Score, String phone, TextView phoneno, TextView username) {
+        String chek = "(\\+?([0-9]{2,3})||0)[7-9][0-1]([\\d]{8})";
+        if(!Pattern.matches(chek,phone)){
+            phoneno.setText("");
+            phoneno.setHint("Invalid Phone Number");
+            phoneno.setHintTextColor(Color.RED);
+            return true;
+        }
+
         //check if user name exist already
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM details WHERE usernames = ?", new String[] {usernames});
         if (c.getCount()!=0){
+            username.setText("");
+            username.setHint("User Already Exist!");
+            username.setHintTextColor(Color.RED);
             return true;
         }
         c.close();
@@ -60,6 +75,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put("usernames",usernames);
         values.put("password",passcode);
         values.put("Score",Score);
+        values.put("phonenumber",phone);
 
         // after adding all values we are passing
         // content values to our table.
@@ -84,10 +100,10 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
         return  false;
     }
-    public boolean forgotpassword(String usernames, String passcode) {
+    public boolean forgotpassword(String usernames, String passcode,String phone) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor c = db.rawQuery("SELECT * FROM details WHERE usernames = ?", new String[] {usernames});
+        Cursor c = db.rawQuery("SELECT * FROM details WHERE usernames = ? and phonenumber = ?", new String[] {usernames,phone});
         if (c.moveToFirst()){
             if (check(usernames,passcode)){
                 return false;
@@ -104,6 +120,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return false;
     }
     public Cursor getleaders(){
+
         int n=0;
         int i;
         String user="";
@@ -135,8 +152,8 @@ public class DBHandler extends SQLiteOpenHelper {
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // this method is called to check if the table exists already.
-//        db.execSQL("DROP TABLE IF EXISTS details");
-//        onCreate(db);
+//         this method is called to check if the table exists already.
+        db.execSQL("DROP TABLE IF EXISTS details");
+        onCreate(db);
     }
 }

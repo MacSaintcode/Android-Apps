@@ -92,6 +92,12 @@ public String use;
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent cal=new Intent(register_login.this,MainMenu.class);
+        startActivity(cal);
+        finish();
+    }
 
 }

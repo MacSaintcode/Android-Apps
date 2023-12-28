@@ -152,11 +152,13 @@ public class MainActivity extends AppCompatActivity {
             }
         },2000);
 
-        new AlertDialog.Builder(this).setTitle("Exit Game").setCancelable(false).
+        new AlertDialog.Builder(this).setTitle("Go Back").setCancelable(false).
                 setMessage("Are you sure?").setPositiveButton(
                         "Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                Intent cal=new Intent(MainActivity.this,MainMenu.class);
+                                startActivity(cal);
                                 finish();
                             }
 
@@ -169,8 +171,8 @@ public class MainActivity extends AppCompatActivity {
                 }).show();
     }
     void wat(){
-        Button[] arr ={Answer1,Answer2,Answer3,Answer4,confirm};
-        for (int i = 0; i < arr.length-1; i++) {
+        Button[] arr ={confirm,Answer1,Answer2,Answer3,Answer4};
+        for (int i = 0; i < arr.length; i++) {
             arr[i].setClickable(false);
         }
         Handler handler = new Handler();

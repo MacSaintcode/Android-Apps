@@ -83,4 +83,11 @@ public class Leaderboard extends AppCompatActivity {
                 n++;
             }
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent cal=new Intent(Leaderboard.this,MainMenu.class);
+        startActivity(cal);
+        finish();
+    }
 }
