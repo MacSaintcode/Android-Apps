@@ -41,6 +41,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put("Ratings",rating);
         values.put("Description",description);
         db.insert("Movie_Detailes",null,values);
+        System.out.println("complete!");
 
     }
     Cursor getallmovie(){
