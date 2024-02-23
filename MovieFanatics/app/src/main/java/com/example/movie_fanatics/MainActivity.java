@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
 //                createview(1);
             }
         }else
-//                    if(newText.isBlank
         {
             generate();
         }
