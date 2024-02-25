@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout parentLayout;
     private SearchView search;
     private DBHandler DBHandler;
-
     private Spinner spin;
 
 
