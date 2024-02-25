@@ -5,17 +5,23 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.content.res.Resources;
 
 import androidx.annotation.Nullable;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class DBHandler extends SQLiteOpenHelper {
+    Context c;
 
     public DBHandler(@Nullable Context context) {
         super(context, "Movie_Handler", null, 2);
+        c=context;
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -24,27 +30,28 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL(Movie_Table);
         db.execSQL(Movie_Reviews);
     }
-    void addmovies(String moviename, String image, double rating, String description,String genre){
-        SQLiteDatabase db= this.getWritableDatabase();
+    void addmovies(String moviename, double rating, String description,String genre){
+        SQLiteDatabase db=this.getWritableDatabase();
+//        db.execSQL("delete from Movie_Detailes");
+
+        db= this.getWritableDatabase();
         ContentValues values= new ContentValues();
 
+        Bitmap bitmap = BitmapFactory.decodeResource(c.getResources(), R.drawable.res);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] img = stream.toByteArray();
         values.put("Movie_Names",moviename);
-         try{
-             FileInputStream file=new FileInputStream(image);
-             byte[]img=new byte[file.available()];
-             file.read(img);
-             values.put("Movie_image",img);
-         }catch (Exception e){
-             e.printStackTrace();
-        }
+        values.put("Movie_image",img);
         values.put("Genre",genre);
         values.put("Ratings",rating);
         values.put("Description",description);
-        db.insert("Movie_Detailes",null,values);
-        System.out.println("complete!");
+      long t= db.insert("Movie_Detailes",null,values);
+        System.out.println("complete!"+ t);
 
     }
     Cursor getallmovie(){
+
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor c= db.rawQuery("Select * from Movie_Detailes",new String[]{});
         return  c;
