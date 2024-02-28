@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Movie-Fanatics</string>
     <string-array name="spinner_items">
-        <item>Genre</item>
+        <item>All Genre</item>
         <item>Action</item>
         <item>Romance</item>
         <item>X Rated</item>

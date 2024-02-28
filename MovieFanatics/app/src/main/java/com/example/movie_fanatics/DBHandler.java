@@ -30,14 +30,15 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL(Movie_Table);
         db.execSQL(Movie_Reviews);
     }
-    void addmovies(String moviename, double rating, String description,String genre){
+    void addmovies(String moviename,int draw, double rating, String description,String genre){
         SQLiteDatabase db=this.getWritableDatabase();
 //        db.execSQL("delete from Movie_Detailes");
 
         db= this.getWritableDatabase();
         ContentValues values= new ContentValues();
 
-        Bitmap bitmap = BitmapFactory.decodeResource(c.getResources(), R.drawable.res);
+
+        Bitmap bitmap = BitmapFactory.decodeResource(c.getResources(), draw);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] img = stream.toByteArray();
@@ -51,15 +52,29 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
     Cursor getallmovie(){
-
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor c= db.rawQuery("Select * from Movie_Detailes",new String[]{});
         return  c;
     }
 
-     Cursor getmoviegenre(String genre){
+     Cursor getmoviegenre(String genre,String search){
         SQLiteDatabase db=this.getReadableDatabase();
-        Cursor c= db.rawQuery("Select * from Movie_Detailes where Genre =?",new String[]{genre});
+         Cursor c;
+         if (genre.equals("All Genre")){
+             if (!(search.isBlank())) {
+                 System.out.println(search);
+                 c= db.rawQuery("Select * from Movie_Detailes where Movie_Names like ?",new String[]{"%"+search+"%"});
+             }else{
+                c=getallmovie();
+             }
+         }else{
+             if (!(search.isBlank())) {
+                 System.out.println(search);
+                 c= db.rawQuery("Select * from Movie_Detailes where Movie_Names like ? and Genre = ? ",new String[]{"%"+search+"%",genre});
+             }else{
+                 c= db.rawQuery("Select * from Movie_Detailes where Genre =?",new String[]{genre});
+            }
+         }
         return  c;
     }
     Cursor getreviews(int id,String review){
@@ -79,7 +94,7 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db;
         Cursor c;
     db=this.getReadableDatabase();
-    if (genre.equals("Genre")){
+    if (genre.equals("All Genre")){
         c=db.rawQuery("Select * from Movie_Detailes where Movie_Names like ? ",new String[]{"%"+name+"%"});
     }else{
         c=db.rawQuery("Select * from Movie_Detailes where Movie_Names like ? and Genre = ? ",new String[]{"%"+name+"%",genre});

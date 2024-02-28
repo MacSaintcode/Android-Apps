@@ -39,31 +39,36 @@ public class MainActivity extends AppCompatActivity {
         spin = findViewById(R.id.genre);
 
         parentLayout.setHorizontalScrollBarEnabled(true);
-        DBHandler.addmovies("Firstmovie",
-                5.4,"bolo","Romance");
-        generate();
 
-//        spin.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                DBHandler.getmoviegenre(parent.getItemAtPosition(position).toString());
-//            }
-//        });
+        String name[]={"Romance","Action","X Rated"};
+        for (int i = 1; i < 3; i++) {
+            DBHandler.addmovies(i+"st molie",R.drawable.res,
+                    5.4,"bolo",name[i]);
+        }
+        Cursor c=DBHandler.getallmovie();
+       generate(c);
+
+        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Cursor c= DBHandler.getmoviegenre(parent.getItemAtPosition(position).toString(),search.getQuery().toString());
+                if(c.getCount()==0){
+                    nores();
+                }else{
+                    generate(c);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Cursor c=DBHandler.moviesearch(query,spin.getSelectedItem().toString());
-                int count=c.getCount();
-                if(count==0){
-                    nores();
-                }else {
-                    parentLayout.removeAllViews();
-                    Toast.makeText(MainActivity.this, count+" Result", Toast.LENGTH_SHORT).show();
-                }
+                search(query);
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 search(newText);
@@ -71,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     void search(String newText){
         int count=0;
         if (!(newText.isBlank())){
@@ -80,40 +86,30 @@ public class MainActivity extends AppCompatActivity {
             if(count==0){
                 nores();
             }else {
-                parentLayout.removeAllViews();
-                Toast.makeText(MainActivity.this, count+" Result", Toast.LENGTH_SHORT).show();
-            }
-            if(newText.equalsIgnoreCase("kk")){
-                parentLayout.removeAllViews();
-//                createview(1);
+                generate(c);
+//                Toast.makeText(MainActivity.this, count+" Result", Toast.LENGTH_SHORT).show();
             }
         }else
         {
-            generate();
+            Cursor c=DBHandler.getallmovie();
+            generate(c);
         }
     }
+
     void nores(){
         parentLayout.removeAllViews();
         ImageView img = new ImageView(this);
         img.setImageResource(R.drawable.rt2);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
+                    ViewGroup.LayoutParams.MATCH_PARENT
         );
         img.setLayoutParams(layoutParams);
         parentLayout.addView(img);// Add ImageView to the parent layout
     }
     
-    void  generate(){
+    void generate(Cursor c){
         parentLayout.removeAllViews();
-        int numTextViewsNeeded = 5;
-
-        // Loop to create TextViews
-//        for (int i = 1; i <= numTextViewsNeeded; i++) {
-//            createview(i);
-//        }
-
-        Cursor c=DBHandler.getallmovie();
         String moviename;
         Bitmap bit;
         byte[] img;
@@ -124,58 +120,11 @@ public class MainActivity extends AppCompatActivity {
             createview(1,moviename,bit);
         }
     }
-//    private void createview(int id) {
-//        ImageView img = new ImageView(this);
-//        TextView textView = new TextView(this);
-//
-//        img.setBackgroundColor(Color.RED);
-//        img.setPadding(450,300,450,300);
-//        img.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                img.setBackgroundColor(Color.BLUE);
-////                img.setImageBitmap();
-//                textView.setTextColor(Color.BLUE);
-//            }
-//        });
-//
-//        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-//                ViewGroup.LayoutParams.WRAP_CONTENT,
-//                ViewGroup.LayoutParams.WRAP_CONTENT
-//        );
-//        img.setLayoutParams(layoutParams);
-//
-////       -----------------------------------------------------------------------------------------------------
-//
-//        textView.setText("Moviename "+id);
-//
-//        textView.setId(id);
-//        textView.setTextSize(16);
-//        textView.setTypeface(null, Typeface.BOLD);
-//        textView.setPadding(20,10,20,40);
-//
-//        layoutParams = new LinearLayout.LayoutParams(
-//                ViewGroup.LayoutParams.WRAP_CONTENT,
-//                ViewGroup.LayoutParams.WRAP_CONTENT
-//        );
-//        textView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                textView.setTextColor(Color.BLUE);
-//                img.setBackgroundColor(Color.BLUE);
-//            }
-//        });
-//
-//        textView.setLayoutParams(layoutParams);
-//
-//        parentLayout.addView(img);// Add ImageView to the parent layout
-//        parentLayout.addView(textView); // Add TextView to the parent layout
-//    }
+
     private void createview(int id, String moviename,Bitmap imgs) {
         ImageView img = new ImageView(this);
         TextView textView = new TextView(this);
         img.setImageBitmap(imgs);
-//        img.setPadding(450,300,450,300);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -184,14 +133,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
         );
         img.setLayoutParams(layoutParams);
 
 //       -----------------------------------------------------------------------------------------------------
 
-        textView.setText(moviename+id);
+        textView.setText(moviename);
         textView.setId(id);
         textView.setTextSize(16);
         textView.setTypeface(null, Typeface.BOLD);
