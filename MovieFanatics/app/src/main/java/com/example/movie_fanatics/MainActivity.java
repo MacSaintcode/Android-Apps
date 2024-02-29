@@ -2,6 +2,7 @@ package com.example.movie_fanatics;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -42,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
         String name[]={"Romance","Action","X Rated"};
         for (int i = 1; i < 3; i++) {
-            DBHandler.addmovies(i+"st molie",R.drawable.res,
-                    5.4,"bolo",name[i]);
+            DBHandler.addmovies("Instigator",R.drawable.res,
+                    4.3,"bolo",name[i]);
         }
         Cursor c=DBHandler.getallmovie();
        generate(c);
@@ -87,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
                 nores();
             }else {
                 generate(c);
-//                Toast.makeText(MainActivity.this, count+" Result", Toast.LENGTH_SHORT).show();
             }
         }else
         {
@@ -113,11 +113,15 @@ public class MainActivity extends AppCompatActivity {
         String moviename;
         Bitmap bit;
         byte[] img;
+        int id;
         while (c.moveToNext()) {
             moviename=c.getString(1);
             img=c.getBlob(2);
             bit= BitmapFactory.decodeByteArray(img,0,img.length);
-            createview(1,moviename,bit);
+            id=c.getInt(0);
+            System.out.println(id);
+            System.out.println(moviename);
+            createview(id,moviename,bit);
         }
     }
 
@@ -125,13 +129,16 @@ public class MainActivity extends AppCompatActivity {
         ImageView img = new ImageView(this);
         TextView textView = new TextView(this);
         img.setImageBitmap(imgs);
+        img.setId(id);
+        Intent call= new Intent(MainActivity.this, Reviews.class);
+        call.putExtra("id",id);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textView.setTextColor(Color.BLUE);
+//                textView.setTextColor(Color.BLUE);
+                startActivity(call);
             }
         });
-
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
@@ -153,12 +160,11 @@ public class MainActivity extends AppCompatActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textView.setTextColor(Color.BLUE);
+                startActivity(call);
             }
         });
 
         textView.setLayoutParams(layoutParams);
-
         parentLayout.addView(img);// Add ImageView to the parent layout
         parentLayout.addView(textView); // Add TextView to the parent layout
     }

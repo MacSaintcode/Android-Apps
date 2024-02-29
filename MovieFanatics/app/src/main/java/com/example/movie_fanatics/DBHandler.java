@@ -20,43 +20,43 @@ public class DBHandler extends SQLiteOpenHelper {
     Context c;
 
     public DBHandler(@Nullable Context context) {
-        super(context, "Movie_Handler", null, 2);
+        super(context, "Movie_Handler", null, 5);
         c=context;
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
         String Movie_Table="CREATE TABLE if not exists Movie_Detailes (Id INTEGER PRIMARY KEY AUTOINCREMENT, Movie_Names TEXT,Movie_image BLOB,Genre TEXT,Ratings DOUBLE,Description TEXT)";
-        String Movie_Reviews="CREATE TABLE if not exists Movie_Reviews (Id INTEGER REFERENCES Movie_Details(Id),Rating DOUBLE,Review TEXT)";
+        String Movie_Reviews="CREATE TABLE if not exists Movie_Reviews (Id INTEGER REFERENCES Movie_Details(Id) ,Review TEXT)";
         db.execSQL(Movie_Table);
         db.execSQL(Movie_Reviews);
     }
     void addmovies(String moviename,int draw, double rating, String description,String genre){
         SQLiteDatabase db=this.getWritableDatabase();
-//        db.execSQL("delete from Movie_Detailes");
+
 
         db= this.getWritableDatabase();
         ContentValues values= new ContentValues();
-
 
         Bitmap bitmap = BitmapFactory.decodeResource(c.getResources(), draw);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] img = stream.toByteArray();
+
         values.put("Movie_Names",moviename);
         values.put("Movie_image",img);
         values.put("Genre",genre);
         values.put("Ratings",rating);
         values.put("Description",description);
+
       long t= db.insert("Movie_Detailes",null,values);
         System.out.println("complete!"+ t);
-
+//        db.execSQL("delete from Movie_Detailes");
     }
     Cursor getallmovie(){
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor c= db.rawQuery("Select * from Movie_Detailes",new String[]{});
         return  c;
     }
-
      Cursor getmoviegenre(String genre,String search){
         SQLiteDatabase db=this.getReadableDatabase();
          Cursor c;
@@ -79,15 +79,14 @@ public class DBHandler extends SQLiteOpenHelper {
     }
     Cursor getreviews(int id,String review){
         SQLiteDatabase db=this.getReadableDatabase();
-        Cursor c=db.rawQuery("Select * from Movie_Reviews",new String[]{});
+        Cursor c=db.rawQuery("Select Review from Movie_Reviews where Id = ?",new String[]{String.valueOf(id)});
         return c;
     }
-    void setreviews(Float rating,String review){
+    void setreviews(int id,String review){
         SQLiteDatabase db= this.getWritableDatabase();
         ContentValues values= new ContentValues();
-        values.put("Ratings",rating);
         values.put("Review",review);
-
+        values.put("Id",id);
         db.insert("Movie_Reviews",null,values);
     }
     Cursor moviesearch(String name,String genre){
@@ -101,9 +100,9 @@ public class DBHandler extends SQLiteOpenHelper {
     }
         return c;
     }
-    Cursor getmovie(String name,int num){
+    Cursor getmovie(int num){
         SQLiteDatabase db=this.getReadableDatabase();
-        Cursor c=db.rawQuery("Select * from Movie_Detailes where Movie_Names=? and Id=? ",new String[]{name, String.valueOf(num)});
+        Cursor c=db.rawQuery("Select * from Movie_Detailes where Id=? ",new String[]{String.valueOf(num)});
         return c;
     }
     @Override
