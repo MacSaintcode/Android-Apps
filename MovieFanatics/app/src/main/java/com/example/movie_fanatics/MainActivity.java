@@ -20,6 +20,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+import java.util.stream.DoubleStream;
+
 public class MainActivity extends AppCompatActivity {
 
     private LinearLayout parentLayout;
@@ -40,12 +43,19 @@ public class MainActivity extends AppCompatActivity {
         spin = findViewById(R.id.genre);
 
         parentLayout.setHorizontalScrollBarEnabled(true);
-
-        String name[]={"Romance","Action","X Rated"};
-        for (int i = 1; i < 3; i++) {
-            DBHandler.addmovies("Instigator",R.drawable.res,
-                    4.3,"bolo",name[i]);
-        }
+//        Random rand=new Random();
+//        String name[]={"Romance","Action","X Rated","Horror"};
+//        String movi[]={"Instigator","The Fraction","Lily Rose","Roxxan","Anna","Reve Rex","The Salamander",
+//                "The Silver Tongue","Razor Sharp","Fillet","The Judas Family","Deadly Kimiyo"};
+//        int count=0;
+//        for (int i = 1; i < movi.length+1; i++) {
+//            if(count==4){
+//                count=0;
+//            }
+//            DBHandler.addmovies(movi[i-1],R.drawable.res,
+//                 rand.nextInt(6),"bolo",name[count]);
+//            count++;
+//        }
         Cursor c=DBHandler.getallmovie();
        generate(c);
 
@@ -91,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }else
         {
-            Cursor c=DBHandler.getallmovie();
+            Cursor c=DBHandler.getmoviegenre(spin.getSelectedItem().toString(),newText);
             generate(c);
         }
     }

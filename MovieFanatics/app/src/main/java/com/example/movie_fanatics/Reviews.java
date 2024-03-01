@@ -6,11 +6,15 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,11 +24,10 @@ public class Reviews extends AppCompatActivity {
 
     private RatingBar rate;
     private TextView moviename;
-    private ImageView imgview;
+    private ImageView imgview,back;
     private EditText comment;
+    LinearLayout layout;
     DBHandler db;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +37,8 @@ public class Reviews extends AppCompatActivity {
         moviename=findViewById(R.id.Moviename);
         imgview=findViewById(R.id.send);
         comment=findViewById(R.id.comment);
+        back=findViewById(R.id.back);
+        layout=findViewById(R.id.comentsection);
 
         db=new DBHandler(this);
         Intent get=getIntent();
@@ -59,13 +64,39 @@ public class Reviews extends AppCompatActivity {
                 if(com.length()>0){
                     db.setreviews(id,com);
                     comment.setText("");
+                    Cursor c=db.getreviews(id);
+                    layout.removeAllViews();
+                    while (c.moveToNext()){
+                        createviews(c.getString(0));
+                    }
                 }
                 else {
                     Toast.makeText(Reviews.this, "Comment field can't be empty", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        c=db.getreviews(id);
+        while (c.moveToNext()){
+            createviews(c.getString(0));
+        }
+    }
+    private void createviews(String review) {
 
+        TextView textView = new TextView(this);
+        textView.setText("Watcher's Review: "+review);
+        textView.setTypeface(null, Typeface.BOLD);
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        textView.setLayoutParams(layoutParams);
+        layout.addView(textView); // Add TextView to the parent layout
     }
 }

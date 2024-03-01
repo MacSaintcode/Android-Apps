@@ -50,6 +50,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
       long t= db.insert("Movie_Detailes",null,values);
         System.out.println("complete!"+ t);
+//        db.execSQL("delete from Movie_Reviews");
 //        db.execSQL("delete from Movie_Detailes");
     }
     Cursor getallmovie(){
@@ -77,7 +78,7 @@ public class DBHandler extends SQLiteOpenHelper {
          }
         return  c;
     }
-    Cursor getreviews(int id,String review){
+    Cursor getreviews(int id){
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor c=db.rawQuery("Select Review from Movie_Reviews where Id = ?",new String[]{String.valueOf(id)});
         return c;
@@ -102,7 +103,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
     Cursor getmovie(int num){
         SQLiteDatabase db=this.getReadableDatabase();
-        Cursor c=db.rawQuery("Select * from Movie_Detailes where Id=? ",new String[]{String.valueOf(num)});
+        Cursor c=db.rawQuery("Select * from Movie_Detailes where Id = ? ",new String[]{String.valueOf(num)});
         return c;
     }
     @Override
